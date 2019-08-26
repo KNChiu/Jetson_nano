@@ -40,7 +40,26 @@
 # Transfer Learning (轉移學習)
   https://medium.com/%E6%88%91%E5%B0%B1%E5%95%8F%E4%B8%80%E5%8F%A5-%E6%80%8E%E9%BA%BC%E5%AF%AB/transfer-learning-%E8%BD%89%E7%A7%BB%E5%AD%B8%E7%BF%92-4538e6e2ffe4
   
- 
+# Thumbs Project (應用)
+  //Open Terminal jupyter lab
+    nvdli-nano -> classification -> classification_interactive.ipynb
+    
+  //Camera (CSICamera or USBCamera)
+    *There can only be one instance of CSICamera or USBCamera at a time.
+  //-----------------------------------------------
+    # Full reset of the camera
+    !echo 'dlinano' | sudo -S systemctl restart nvargus-daemon && printf '\n'
+    
+    # Check device number
+    !ls -ltrh /dev/video*
 
+    # USB Camera (Logitech C270 webcam)
+    from jetcam.usb_camera import USBCamera
+    camera = USBCamera(width=224, height=224, capture_device=0) # capture_device=0 USB port
+   
+  //-----------------------------------------------
+  
+  
+  
 
   
