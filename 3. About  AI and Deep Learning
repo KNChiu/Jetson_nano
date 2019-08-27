@@ -2,14 +2,16 @@
 
 # AI and Deep Learning
 
+  # What the difference between Machine Learning and Deep Learning?
+    ## https://blogs.nvidia.com.tw/2016/07/whats-difference-artificial-intelligence-machine-learning-deep-learning-ai/
+  
   # Machine Learning (機器學習)
     A branch of AI to generalize and classify images based on experience in the form of lots of example data.
-
     ## 資料 -> 得到函數 -> (學習) -> 規則 -> 預測
   
   # Deep Learning (深度學習)
     A Technique for Implementing Machine Learning.
-    「一種實現機器學習的技術。」
+    「一種實現機器學習的技術」
 
     ## https://blog.gcp.expert/ml-1-ai-ml-deep-learning-intro/
   
