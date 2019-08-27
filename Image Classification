@@ -1,29 +1,5 @@
 2019/08/26
-
-# AI and Deep Learning
-
-// Machine Learning (機器學習)
-  A branch of AI to generalize and classify images based on experience in the form of lots of example data.
-  「透過從過往的資料和經驗中學習並找到其運行規則，最後達到人工智慧的方法。」
-  
-  資料 -> 得到函數 -> (學習) -> 規則 -> 預測
-  
-// Deep Learning (深度學習)
-  A Technique for Implementing Machine Learning
-  「一種實現機器學習的技術。」
-
-  https://blog.gcp.expert/ml-1-ai-ml-deep-learning-intro/
-  
-# Deep Learning Models
-  A Deep Learning model consists of a neural network with internal parameters. 
-  
-// weights (權重)
-  表徵不同單元之間連接的強度
-  Before training, the model cannot accurately determine the correct class from an image input, because the weights are wrong.
-  
-  https://medium.com/@baubibi/%E9%80%9F%E8%A8%98ai%E8%AA%B2%E7%A8%8B-%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E5%85%A5%E9%96%80-%E4%B8%80-68e27912ce30
-  https://bigdatafinance.tw/index.php/tech/methodology/472-2017-11-08-06-54-27
-  
+ 
 # Convolutional Neural Networks (CNN) (卷积神经网络)
   Deep learning relies on Convolutional Neural Network (CNN) models to transform images into predicted classifications.
   And is the preferred network for image applications.
