@@ -1,12 +1,12 @@
 2019/08/27
 
 # Thumbs Project (應用)
-  //Open Terminal jupyter lab
-    nvdli-nano -> classification -> classification_interactive.ipynb
+  # Open Terminal jupyter lab
+    ## nvdli-nano -> classification -> classification_interactive.ipynb
     
-  //Camera (CSICamera or USBCamera)
-    *There can only be one instance of CSICamera or USBCamera at a time.
-#===============================================
+  # Camera (CSICamera or USBCamera)
+    ## *There can only be one instance of CSICamera or USBCamera at a time.
+#====================== Camera =========================
     # Full reset of the camera
     !echo 'dlinano' | sudo -S systemctl restart nvargus-daemon && printf '\n'
     
@@ -19,12 +19,12 @@
     
     camera.running = True
     print("camera created")
-#===============================================
+#======================= Camera ========================
 
-  //Task
-    Define TASK and CATEGORIES parameters ,in this project it's already been defined,
-    so just define your project TASK and what CATEGORIES of data you will collect. 
-#===============================================
+  # Task
+    ## Define TASK and CATEGORIES parameters ,in this project it's already been defined,
+    ## so just define your project TASK and what CATEGORIES of data you will collect. 
+#======================= Task ========================
     import torchvision.transforms as transforms
     from dataset import ImageClassificationDataset
     
@@ -61,11 +61,12 @@
     
     # https://www.itread01.com/content/1546227125.html
     # https://www.itread01.com/content/1546227125.html#10transformsNormalize_120
-#===============================================
+#========================= Task ======================
   
-  //Data Collection 
-    Collect images for your categories with your camera using an iPython widget. 
-#===============================================  
+  
+  # Data Collection 
+    ## Collect images for your categories with your camera using an iPython widget. 
+#========================= Data Collection ======================  
     import ipywidgets
     import traitlets
     from IPython.display import display
@@ -115,4 +116,202 @@
     # display(data_collection_widget)
     print("data_collection_widget created")
 
+#======================== Data Collection =======================  
   
+  
+  # Model
+#======================== Model =======================  
+    import torch
+    import torchvision
+    
+    # Choose GPU device with the statement.
+    device = torch.device('cuda')
+
+    # The model is set to the ResNet-18 model.
+    # pretrained=True parameter indicates we are loading all the parameter weights for the trained Resnet-18 model.
+    model = torchvision.models.resnet18(pretrained=True)
+    
+    #指维度
+    model.fc = torch.nn.Linear(512, len(dataset.categories))
+
+    model = model.to(device)
+
+    model_save_button = ipywidgets.Button(description='save model')
+    model_load_button = ipywidgets.Button(description='load model')
+    model_path_widget = ipywidgets.Text(description='model path', value='my_model.pth')
+
+    def load_model(c):
+        model.load_state_dict(torch.load(model_path_widget.value))
+    model_load_button.on_click(load_model)
+
+    def save_model(c):
+        torch.save(model.state_dict(), model_path_widget.value)
+    model_save_button.on_click(save_model)
+
+    model_widget = ipywidgets.VBox([
+        model_path_widget,
+        ipywidgets.HBox([model_load_button, model_save_button])
+    ])
+
+    # display(model_widget)
+    print("model configured and model_widget created")
+    
+#======================== Model ======================= 
+
+
+  # Live Execution
+#======================== Live Execution =======================  
+    import threading  
+    import time
+    from utils import preprocess
+    import torch.nn.functional as F
+
+    state_widget = ipywidgets.ToggleButtons(options=['stop', 'live'], description='state', value='stop')
+    prediction_widget = ipywidgets.Text(description='prediction')
+    score_widgets = []
+    for category in dataset.categories:
+        score_widget = ipywidgets.FloatSlider(min=0.0, max=1.0, description=category, orientation='vertical')
+        score_widgets.append(score_widget)
+
+    def live(state_widget, model, camera, prediction_widget, score_widget):
+        global dataset
+        while state_widget.value == 'live':
+            image = camera.value
+            preprocessed = preprocess(image)
+            output = model(preprocessed)
+            output = F.softmax(output, dim=1).detach().cpu().numpy().flatten()
+            category_index = output.argmax()
+            prediction_widget.value = dataset.categories[category_index]
+            for i, score in enumerate(list(output)):
+                score_widgets[i].value = score
+
+    def start_live(change):
+        if change['new'] == 'live':
+            execute_thread = threading.Thread(target=live, args=(state_widget, model, camera, prediction_widget, score_widget))
+            execute_thread.start()
+
+    state_widget.observe(start_live, names='value')
+
+    live_execution_widget = ipywidgets.VBox([
+        ipywidgets.HBox(score_widgets),
+        prediction_widget,
+        state_widget
+    ])
+
+    # display(live_execution_widget)
+    print("live_execution_widget created")
+#======================== Live Execution =======================  
+
+
+  # Training and Evaluation
+#======================== Training and Evaluation ======================= 
+    BATCH_SIZE = 8
+
+    optimizer = torch.optim.Adam(model.parameters())
+    # optimizer = torch.optim.SGD(model.parameters(), lr=1e-3, momentum=0.9)
+
+    epochs_widget = ipywidgets.IntText(description='epochs', value=1)
+    eval_button = ipywidgets.Button(description='evaluate')
+    train_button = ipywidgets.Button(description='train')
+    loss_widget = ipywidgets.FloatText(description='loss')
+    accuracy_widget = ipywidgets.FloatText(description='accuracy')
+    progress_widget = ipywidgets.FloatProgress(min=0.0, max=1.0, description='progress')
+
+    def train_eval(is_training):
+        global BATCH_SIZE, LEARNING_RATE, MOMENTUM, model, dataset, optimizer, eval_button, train_button, accuracy_widget, loss_widget, progress_widget, state_widget
+
+        try:
+            train_loader = torch.utils.data.DataLoader(
+                dataset,
+                batch_size=BATCH_SIZE,
+                shuffle=True
+            )
+
+            state_widget.value = 'stop'
+            train_button.disabled = True
+            eval_button.disabled = True
+            time.sleep(1)
+
+            if is_training:
+                model = model.train()
+            else:
+                model = model.eval()
+            while epochs_widget.value > 0:
+                i = 0
+                sum_loss = 0.0
+                error_count = 0.0
+                for images, labels in iter(train_loader):
+                    # send data to device
+                    images = images.to(device)
+                    labels = labels.to(device)
+
+                    if is_training:
+                        # zero gradients of parameters
+                        optimizer.zero_grad()
+
+                    # execute model to get outputs
+                    outputs = model(images)
+
+                    # compute loss
+                    loss = F.cross_entropy(outputs, labels)
+
+                    if is_training:
+                        # run backpropogation to accumulate gradients
+                        loss.backward()
+
+                        # step optimizer to adjust parameters
+                        optimizer.step()
+
+                    # increment progress
+                    error_count += len(torch.nonzero(outputs.argmax(1) - labels).flatten())
+                    count = len(labels.flatten())
+                    i += count
+                    sum_loss += float(loss)
+                    progress_widget.value = i / len(dataset)
+                    loss_widget.value = sum_loss / i
+                    accuracy_widget.value = 1.0 - error_count / i
+
+                if is_training:
+                    epochs_widget.value = epochs_widget.value - 1
+                else:
+                    break
+        except e:
+            pass
+        model = model.eval()
+
+        train_button.disabled = False
+        eval_button.disabled = False
+        state_widget.value = 'live'
+
+    train_button.on_click(lambda c: train_eval(is_training=True))
+    eval_button.on_click(lambda c: train_eval(is_training=False))
+
+    train_eval_widget = ipywidgets.VBox([
+        epochs_widget,
+        progress_widget,
+        loss_widget,
+        accuracy_widget,
+        ipywidgets.HBox([train_button, eval_button])
+    ])
+
+    # display(train_eval_widget)
+    print("trainer configured and train_eval_widget created")
+  
+#====================== Training and Evaluation =========================
+
+
+
+  # Display the Interactive Tool
+#====================== isplay the Interactive Tool ========================= 
+    # Combine all the widgets into one display
+    all_widget = ipywidgets.VBox([
+        ipywidgets.HBox([data_collection_widget, live_execution_widget]), 
+        train_eval_widget,
+        model_widget
+    ])
+
+    display(all_widget)
+
+#====================== isplay the Interactive Tool ========================= 
+
+
