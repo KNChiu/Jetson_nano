@@ -1,1 +1,13 @@
+# 2019/08/27
 
+# Install by conda
+  conda install -c conda-forge jupyterlab
+
+# Install by pip
+  pip install jupyterlab
+
+# Open the following link address : 
+  192.168.55.1:8888
+  ## Or type in "jupyter lab" on terminal.
+
+# 
