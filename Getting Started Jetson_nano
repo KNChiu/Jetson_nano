@@ -25,8 +25,11 @@
             Raspberry Pi Camera Module v2
     # Can only use one kint of camera in one time usb port or MIPI Camera Serial Interface (CSI) port
 
+# Write Image to the microSD Card
+  Using SD Card Formatter to formate the SD Card.
   
-  
+
+
 
   
 
