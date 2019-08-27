@@ -1,6 +1,6 @@
 # 2019/08/27
  
- # Convolutional Neural Networks (CNN) (卷积神经网络)
+ # Convolutional Neural Networks (CNN) (卷積神經網路)
    Deep learning relies on Convolutional Neural Network (CNN) models to transform images into predicted classifications.
    And is the preferred network for image applications.
 
