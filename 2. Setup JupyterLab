@@ -7,9 +7,8 @@
     Provide transient scratchpads for running code interactively, with full support for rich output.   
   2. Kernel-backed documents :
     Markdown, Python, R, LaTeX ...   
-  3. JupyterLab understands many file formats 
-    images, CSV, JSON, Markdown, PDF ...
-   
+  3. JupyterLab extensions can customize or enhance any part of JupyterLab.
+  4. Including new themes, file editors, and custom components.
 
 # Install by conda
   conda install -c conda-forge jupyterlab
