@@ -17,9 +17,11 @@
   from one layer with a convolution kernel (filter) to form a transformed feature map for the next layer. 
   As it is trained, the CNN adjusts automatically to find the most relevant features based on its classification requirements.
 
+
  # Accelerating CNNs using GPUs
   Training CNN models and running inference through trained CNN models can be quite large, need requiring intensive compute resources and time,
   because of the frameworks, useing GPU can speeding up training and inference tasks.
+  
   
  # GPU
   Jetson Nano includes a 128-core GPU, Since it can run the full training frameworks, it is also able to re-train networks with transfer learning.
@@ -28,6 +30,10 @@
    ## https://medium.com/%E6%88%91%E5%B0%B1%E5%95%8F%E4%B8%80%E5%8F%A5-%E6%80%8E%E9%BA%BC%E5%AF%AB/transfer-learning-%E8%BD%89%E7%A7%BB%E5%AD%B8%E7%BF%92-4538e6e2ffe4
 
 
+ # Residual Networks
+  ResNet is a residual network, made with building blocks that incorporate "shortcut connections" that skip one or more layers. 
+  This technique makes the network easier to optimize, and have higher accuracy gains at greatly increased depths.
+  Using ResNet-18 provides a good balance of performance and efficiency sized well for the Jetson Nano
   
 
   
