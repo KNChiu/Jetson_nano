@@ -1,0 +1,22 @@
+# 2019/08/27
+ 
+ # Convolutional Neural Networks (CNN) (卷积神经网络)
+   Deep learning relies on Convolutional Neural Network (CNN) models to transform images into predicted classifications.
+   And is the preferred network for image applications.
+
+ # Artificial Neural Network (人工神經網路)
+   The network transforms input data by applying a nonlinear function to a weighted sum of the inputs.
+   The intermediate outputs of one layer, called features, are used as the input into the next layer. 
+   The neural network, through repeated transformations, learns multiple layers of nonlinear features (like edges and shapes), 
+   which it then combines in a final layer to create a prediction (of more complex objects). 
+
+ # Convolutions (卷積)
+   ## https://www.zhihu.com/question/22298352
+
+ # Transfer Learning (轉移學習)
+   ## https://medium.com/%E6%88%91%E5%B0%B1%E5%95%8F%E4%B8%80%E5%8F%A5-%E6%80%8E%E9%BA%BC%E5%AF%AB/transfer-learning-%E8%BD%89%E7%A7%BB%E5%AD%B8%E7%BF%92-4538e6e2ffe4
+
+
+  
+
+  
