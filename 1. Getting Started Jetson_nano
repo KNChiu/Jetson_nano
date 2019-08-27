@@ -7,7 +7,7 @@
   4. View course and get start
   
 # Prerequisites
-  In order to be successful in this course, you will need the following:
+  In order to be successful in this course, we need:
 
   > Jetson Nano Developer Kit
   
@@ -21,8 +21,8 @@
     # To use the barrel-type power supply on the Jetson Nano (J48)
   
   > compatible camera such as
-            Logitech C270 Webcam
-            Raspberry Pi Camera Module v2
+        > Logitech C270 Webcam
+        > Raspberry Pi Camera Module v2
     # Can only use one kint of camera in one time usb port or MIPI Camera Serial Interface (CSI) port
 
 # Write Image to the microSD Card
