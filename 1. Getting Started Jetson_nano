@@ -12,22 +12,31 @@
   > Jetson Nano Developer Kit
   
   > microSD Card
-    # Use a microSD card as a boot device and for main storage. 
+    ## Use a microSD card as a boot device and for main storage. 
     
   > Compatible 5V 4A Power Supply with 2.1mm DC barrel connector
-    # Because of the high GPU compute load , we need the 5V 4A DC barrel jack power supply.
+    ## Because of the high GPU compute load , we need the 5V 4A DC barrel jack power supply.
     
   > 2-pin jumper
-    # To use the barrel-type power supply on the Jetson Nano (J48)
+    ## To use the barrel-type power supply on the Jetson Nano (J48)
   
   > compatible camera such as
-        > Logitech C270 Webcam
-        > Raspberry Pi Camera Module v2
-    # Can only use one kint of camera in one time usb port or MIPI Camera Serial Interface (CSI) port
+    > Logitech C270 Webcam
+    > Raspberry Pi Camera Module v2
+    ## Can only use one kint of camera in one time usb port or MIPI Camera Serial Interface (CSI) port
 
 # Write Image to the microSD Card
   Using SD Card Formatter to formate the SD Card.
   
+# Setup and First Boot
+  Using two kind of mode to running the Jetson Nano.
+    > Headless 
+      ## This method conserves memory resources on the Jetson Nano.
+      
+    > USB Device Mode
+      ## This eliminates the need for a network connection on the Jetson Nano.
+      
+ 
 
 
 
