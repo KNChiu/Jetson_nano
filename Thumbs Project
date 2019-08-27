@@ -1,0 +1,68 @@
+2019/08/27
+
+# Thumbs Project (應用)
+  //Open Terminal jupyter lab
+    nvdli-nano -> classification -> classification_interactive.ipynb
+    
+  //Camera (CSICamera or USBCamera)
+    *There can only be one instance of CSICamera or USBCamera at a time.
+  ===============================================
+    # Full reset of the camera
+    !echo 'dlinano' | sudo -S systemctl restart nvargus-daemon && printf '\n'
+    
+    # Check device number
+    !ls -ltrh /dev/video*
+
+    # USB Camera (Logitech C270 webcam)
+    from jetcam.usb_camera import USBCamera
+    camera = USBCamera(width=224, height=224, capture_device=0) # capture_device=0 USB port
+  ===============================================
+
+  //Task
+    Define TASK and CATEGORIES parameters ,in this project it's already been defined,
+    so just define your project TASK and what CATEGORIES of data you will collect. 
+  ===============================================
+    import torchvision.transforms as transforms
+    from dataset import ImageClassificationDataset
+    
+    # set task name 
+    TASK = 'thumbs'
+    
+    # what categories we need
+    CATEGORIES = ['thumbs_up', 'thumbs_down']
+    
+    
+    DATASETS = ['A', 'B']
+    
+    TRANSFORMS = transforms.Compose([    # 用於把一系列變換組合到一起。
+    
+        # transforms.ColorJitter(brightness=0, contrast=0, saturation=0, hue=0) 修改亮度、對比度和飽和度
+        transforms.ColorJitter(0.2, 0.2, 0.2, 0.2), 
+        
+        # transforms.Resize(size, interpolation=2) 重置影象解析度
+        transforms.Resize((224, 224)),
+        
+        # 轉換為 tensor
+        transforms.ToTensor(),
+        
+        # transforms.Normalize(mean, std) 進行標準化，先減均值，再除以標準差
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ])
+
+    datasets = {}
+    
+    for name in DATASETS:
+        datasets[name] = ImageClassificationDataset(TASK + '_' + name, CATEGORIES, TRANSFORMS)
+
+    print("{} task with {} categories defined".format(TASK, CATEGORIES))
+    
+    # https://www.itread01.com/content/1546227125.html
+    # https://www.itread01.com/content/1546227125.html#10transformsNormalize_120
+  ===============================================
+  
+  // Data Collection 
+    Collect images for your categories with your camera using an iPython widget.
+    
+  ===============================================  
+  
+  
