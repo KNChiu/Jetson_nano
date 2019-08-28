@@ -14,7 +14,7 @@
   # Deep Learning (深度學習)
     A Technique for Implementing Machine Learning.
     「一種實現機器學習的技術」
-    ## 資料 -> 模型(特徵擷取自學) -> 答案
+    ## 資料 -> 特徵擷取(自學) -> 模型 -> 答案
 
     ## https://blog.gcp.expert/ml-1-ai-ml-deep-learning-intro/
   
