@@ -1,13 +1,16 @@
 # 2019/08/27
 
 # About JupyterLab
-  JupyterLab include documents and activities text editors, terminals, and custom components in a flexible.
+  JupyterLab include documents, activities text editors, terminals and custom components in a flexible.
   
   1. Code Consoles :
-    Provide transient scratchpads for running code interactively, with full support for rich output.   
+    ## Provide transient scratchpads for running code interactively, with full support for rich output. 
+    
   2. Kernel-backed documents :
-    Markdown, Python, R, LaTeX ...   
+    ## Markdown, Python, R, LaTeX ... 
+    
   3. JupyterLab extensions can customize or enhance any part of JupyterLab.
+  
   4. Including new themes, file editors, and custom components.
 
 # Install by conda
