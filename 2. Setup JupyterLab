@@ -14,10 +14,10 @@
   4. Including new themes, file editors, and custom components.
 
 # Install by conda
-  conda install -c conda-forge jupyterlab
+$ conda install -c conda-forge jupyterlab
 
 # Install by pip
-  pip install jupyterlab
+$ pip install jupyterlab
 
 # Supported browsers
     > Firefox
