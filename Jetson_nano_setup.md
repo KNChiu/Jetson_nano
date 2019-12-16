@@ -6,7 +6,7 @@
    sudo sh -c ‘echo 255 > /sys/devices/pwm-fan/target_pwm’
    ```
    
-## 網路設定(wifi)
+## 網路設定
    * 列出可用wifi     
    ```
    sudo nmcli device wifi list
@@ -18,6 +18,10 @@
    * 有線連線(USB)
    ```
    IP : 192.168.55.1
+   ```
+   * 使用 ssh 連線同網域設備
+   ```
+   ssh <帳號>@<ip位址>
    ```
    
 ## 電源設定
@@ -48,11 +52,6 @@
    git reset
    ```
 
-## SSH 連線
-   * 使用 ssh 連線同網域設備(USB預設為
-   ```
-   ssh <帳號>@<ip位址>
-   ```
 
 ## 資源監控
    * 安裝 jtop 套件
