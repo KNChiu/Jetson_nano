@@ -33,3 +33,14 @@
    ```
    sudo nvpmodel -m0
    ```
+
+## Git 控管
+   * 取得git文件
+   ```
+   git clone <網址>
+   ```
+   * 更新git文件
+   ```
+   git pull
+   ```
+   
