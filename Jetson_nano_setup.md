@@ -43,4 +43,24 @@
    ```
    git pull
    ```
+   * 重整git文件
+   ```
+   git reset
+   ```
+
+## SSH 連線
+   * 使用 ssh 連線同網域設備(USB預設為
+   ```
+   ssh <帳號>@<ip位址>
+   ```
+
+## 資源監控
+   * 安裝 jtop 套件
+   ```
+   sudo pip install jetson_stats
+   ```
+   * 開啟
+   ```
+   sudo jtop
+   ```
    
